@@ -1,5 +1,6 @@
 package api.automation.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BookingDates {
@@ -26,5 +27,15 @@ public class BookingDates {
 
     public void setCheckout(Date checkout) {
         this.checkout = checkout;
+    }
+
+    public String getCheckinString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(checkin);
+    }
+
+    public String getCheckoutString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(checkout);
     }
 }

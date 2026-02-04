@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="API Automation Test Suite" parallel="tests" thread-count="4">
+    
+    <!-- Create Booking Tests -->
+    <test name="Create Booking Tests">
+        <classes>
+            <class name="api.automation.bookingtests.CreateBookingTests">
+                <methods>
+                    <include name="createBookingWithValidData"/>
+                    <include name="createBookingWithMinimalData"/>
+                    <include name="createBookingWithEmptyFirstName"/>
+                    <include name="createBookingWithHighPrice"/>
+                    <include name="createBookingResponseTime"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Get Booking Tests -->
+    <test name="Get Booking Tests">
+        <classes>
+            <class name="api.automation.bookingtests.GetBookingTests">
+                <methods>
+                    <include name="getAllBookingIds"/>
+                    <include name="getBookingByIdValid"/>
+                    <include name="getBookingByIdInvalid"/>
+                    <include name="getBookingByIdNegative"/>
+                    <include name="getBookingByIdZero"/>
+                    <include name="getBookingResponseTime"/>
+                    <include name="verifyBookingDataStructure"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Update Booking Tests -->
+    <test name="Update Booking Tests">
+        <classes>
+            <class name="api.automation.bookingtests.UpdateBookingTests">
+                <methods>
+                    <include name="updateBookingWithValidData"/>
+                    <include name="updateBookingPartialData"/>
+                    <include name="updateBookingInvalidId"/>
+                    <include name="updateBookingNegativeId"/>
+                    <include name="updateBookingZeroId"/>
+                    <include name="updateBookingResponseTime"/>
+                    <include name="updateBookingWithEmptyFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Delete Booking Tests -->
+    <test name="Delete Booking Tests">
+        <classes>
+            <class name="api.automation.bookingtests.DeleteBookingTests">
+                <methods>
+                    <include name="deleteBookingValidId"/>
+                    <include name="deleteBookingInvalidId"/>
+                    <include name="deleteBookingNegativeId"/>
+                    <include name="deleteBookingZeroId"/>
+                    <include name="deleteBookingResponseTime"/>
+                    <include name="deleteAlreadyDeletedBooking"/>
+                    <include name="deleteMultipleBookings"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+</suite>

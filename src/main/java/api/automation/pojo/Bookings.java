@@ -66,4 +66,9 @@ public class Bookings {
     public void setAdditionalneeds(String additionalneeds) {
         this.additionalneeds = additionalneeds;
     }
+
+    @Override
+    public String toString() {
+        return "{\"firstname\":\"" + firstname + "\",\"lastname\":\"" + lastname + "\",\"totalprice\":" + totalprice + ",\"depositpaid\":" + depositpaid + ",\"bookingdates\":{\"checkin\":\"" + bookingdates.getCheckinString() + "\",\"checkout\":\"" + bookingdates.getCheckoutString() + "\"},\"additionalneeds\":\"" + additionalneeds + "\"}";
+    }
 }

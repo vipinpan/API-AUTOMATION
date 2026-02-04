@@ -55,14 +55,32 @@ public class Booking {
      * Method to update booking details
      * @return Response
      */
-    public Response updateBooking(int id,Bookings updatedbookings){
+    public Response updateBooking(int id, Bookings updatedbookings){
         baseURI = BookingEndpoints.booking_endpoint;
+        AuthHelper authHelper = new AuthHelper();
+        String token = authHelper.getToken();
+        
+        // Build JSON manually to ensure proper date formatting
+        String jsonPayload = String.format(
+            "{\"firstname\":\"%s\",\"lastname\":\"%s\",\"totalprice\":%d,\"depositpaid\":%b,\"bookingdates\":{\"checkin\":\"%s\",\"checkout\":\"%s\"},\"additionalneeds\":\"%s\"}",
+            updatedbookings.getFirstname(),
+            updatedbookings.getLastname(),
+            updatedbookings.getTotalprice(),
+            updatedbookings.isDepositpaid(),
+            updatedbookings.getBookingdates().getCheckinString(),
+            updatedbookings.getBookingdates().getCheckoutString(),
+            updatedbookings.getAdditionalneeds() != null ? updatedbookings.getAdditionalneeds() : ""
+        );
+        
         Response response = given()
+                .relaxedHTTPSValidation()
                 .pathParam("id",id)
                 .contentType(ContentType.JSON)
-                .body(updatedbookings)
+                .header("Cookie", "token=" + token)
+                .body(jsonPayload)
                 .when()
                 .put("/{id}");
+        
         return response;
     }
 
@@ -73,8 +91,12 @@ public class Booking {
      */
     public Response deleteBooking(int id){
         baseURI = BookingEndpoints.booking_endpoint;
+        AuthHelper authHelper = new AuthHelper();
+        String token = authHelper.getToken();
+        
         Response response = given()
                 .pathParam("id", id)
+                .header("Cookie", "token=" + token)
                 .when()
                 .delete("/{id}");
         return response;
